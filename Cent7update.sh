@@ -122,6 +122,17 @@ sed -i "s/#Port 22/Port $sshPort/" /etc/ssh/sshd_config
 systemctl restart sshd
 echo "SSHD Configuration Complete..."
 
+############################ CONFIGURE FAIL2BAN #############################
+echo Setting up fail2ban...
+yum install -y fail2ban
+cd /etc/fail2ban
+cp fail2ban.conf fail2ban.local
+cp jail.conf jail.local
+sed -i -e "s/backend = auto/backend = systemd/" /etc/fail2ban/jail.local
+systemctl enable fail2ban
+systemctl start fail2ban
+echo "FAIL2BAN Setup Complete..."
+
 ########################### FIREWALL-D CONFIG ####################
 echo "Setup Firewalld"
 systemctl enable firewalld
