@@ -1,6 +1,6 @@
 #!/bin/bash
-# SCRIPT TO SET DEFAULT INSTALL FOR NEW CENTOS 8 BUILDS
-### The BASH script should be run on any new CENTOS 8 server....  It performs basic updating, configuration, and security....
+# SCRIPT TO SET DEFAULT INSTALL FOR NEW CENTOS 7 BUILDS
+### The BASH script should be run on any new CENTOS 7 server....  It performs basic updating, configuration, and security....
 ### Run as root!
 
 ####################################CHECK FOR ROOT################################
