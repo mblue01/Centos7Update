@@ -82,6 +82,10 @@ echo "/etc/hosts file updated"
 echo "*********************************************************************"
 echo "*********************************************************************"
 
+##################### Disable IPV6 ##################
+echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
+echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf
+sysctl -p
 
 ##################### Create more robust hostfile logging ##################
 echo 'export HISTSIZE=' >> ~/.bashrc
@@ -119,6 +123,9 @@ sed -i "/PermitRootLogin yes/c\PermitRootLogin no" /etc/ssh/sshd_config
 sed -i 's/.*Port 22.*/&\nProtocol 2/' /etc/ssh/sshd_config
 ### SSHD Port - set here and in FW
 sed -i "s/#Port 22/Port $sshPort/" /etc/ssh/sshd_config
+### Avoid breaking Xforwarding w/ ipv6 disabled
+sed -i "s/#AddressFamily any/AddressFamily inet/" /etc/ssh/sshd_config
+### Restart sshd
 systemctl restart sshd
 echo "SSHD Configuration Complete..."
 
